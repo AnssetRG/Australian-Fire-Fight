@@ -7,6 +7,7 @@ public class FireController : MonoBehaviour
     public int Life;
     public Color NormalColor;
     public Color PressedColor;
+    public int spawnTime;
 
     private void OnMouseDown()
     {

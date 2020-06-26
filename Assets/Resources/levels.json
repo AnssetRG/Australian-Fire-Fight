@@ -1,0 +1,41 @@
+{
+  "levels":[{
+    "level": 1,
+    "fires": [
+      {
+        "life": 10,
+        "scale": 1,
+        "x": 0,
+        "y": 0,
+        "spawnTime":5
+      },
+      {
+        "life": 15,
+        "scale": 1.5,
+        "x": 12.5,
+        "y": 3,
+        "spawnTime":10
+      },
+      {
+        "life": 5,
+        "scale": 0.5,
+        "x": -12.5,
+        "y": 0,
+        "spawnTime":15
+      }
+    ]
+  },
+  {
+    "level": 2,
+    "fires": [
+      {
+        "life": 20,
+        "scale": 2,
+        "x": 0,
+        "y": -3,
+        "spawnTime":5
+      }
+    ]
+  }
+]
+}
