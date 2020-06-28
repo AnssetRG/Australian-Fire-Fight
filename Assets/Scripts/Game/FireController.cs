@@ -12,6 +12,7 @@ public class FireController : MonoBehaviour
 
     private void OnMouseDown()
     {
+        PlayerController.instance.ShootWater(transform.position);
         Life--;
         GetComponent<SpriteRenderer>().color = PressedColor;
         if (Life < 0) {
@@ -31,8 +32,7 @@ public class FireController : MonoBehaviour
 
     private void Update()
     {
-        despawnTime -= Time.deltaTime;
-        print(despawnTime);
+        despawnTime -= Time.deltaTime;        
         if (despawnTime <= 0) {
             print("perdiste sorry"); //aca haces lo del singleton de game over
         }
