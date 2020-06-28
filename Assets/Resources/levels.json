@@ -7,21 +7,24 @@
         "scale": 1,
         "x": 0,
         "y": 0,
-        "spawnTime":5
+        "spawnTime": 5,
+        "despawnTime": 15
       },
       {
         "life": 15,
         "scale": 1.5,
         "x": 12.5,
         "y": 3,
-        "spawnTime":10
+        "spawnTime": 10,
+        "despawnTime": 15
       },
       {
         "life": 5,
         "scale": 0.5,
         "x": -12.5,
         "y": 0,
-        "spawnTime":15
+        "spawnTime": 15,
+        "despawnTime": 15
       }
     ]
   },
@@ -33,7 +36,8 @@
         "scale": 2,
         "x": 0,
         "y": -3,
-        "spawnTime":5
+        "spawnTime": 5,
+        "despawnTime": 15
       }
     ]
   }

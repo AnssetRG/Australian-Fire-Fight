@@ -7,14 +7,14 @@ public class FireController : MonoBehaviour
     public int Life;
     public Color NormalColor;
     public Color PressedColor;
-    public int spawnTime;
+    public int spawnTime; //lo pude directamente en el levelcontroller pq no sabia si cuando estaba en false en active igual corria el update (no lo use)
+    public float despawnTime; //tiempo para que desaparezcan y salga el gameover
 
     private void OnMouseDown()
     {
         Life--;
         GetComponent<SpriteRenderer>().color = PressedColor;
-        if (Life < 0)
-        {
+        if (Life < 0) {
             Destroy(this.gameObject);
         }
     }
@@ -22,5 +22,20 @@ public class FireController : MonoBehaviour
     private void OnMouseUp()
     {
         GetComponent<SpriteRenderer>().color = NormalColor;
+    }
+
+    private void Awake()
+    {
+        despawnTime = 5f;
+    }
+
+    private void Update()
+    {
+        despawnTime -= Time.deltaTime;
+        print(despawnTime);
+        if (despawnTime <= 0) {
+            print("perdiste sorry"); //aca haces lo del singleton de game over
+        }
+
     }
 }

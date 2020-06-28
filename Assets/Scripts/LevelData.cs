@@ -19,4 +19,5 @@ public class Fire {
     public float x;
     public float y;
     public float spawnTime;
+    public float despawnTime;
 }

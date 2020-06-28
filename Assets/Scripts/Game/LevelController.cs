@@ -29,6 +29,7 @@ public class LevelController : MonoBehaviour
             Vector3 position = new Vector3(data.x, data.y);
             GameObject newFire = Instantiate(fireGameObj, position, Quaternion.identity);
             newFire.GetComponent<FireController>().Life = data.life;
+            newFire.GetComponent<FireController>().despawnTime = data.despawnTime;
             newFire.transform.localScale = new Vector3(data.scale,data.scale,1);
             spawnTimers.Add(data.spawnTime);
             newFire.SetActive(false);
@@ -50,7 +51,6 @@ public class LevelController : MonoBehaviour
             if (timeElapsed >= spawnTimers[i]) {
                 spawnTimers[i] = 999; //caquita
                 FireList[i].SetActive(true);
-                print("HOLA");
             }
         }
         if (timeElapsed > mayorSpawnTime) {
