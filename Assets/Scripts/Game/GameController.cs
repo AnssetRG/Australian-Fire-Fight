@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
+    public GameObject ResultPanel;
+    public Button btnMenu;
+    public Button btnReset;
+    public Text txtResult;
 
     void Awake()
     {
@@ -17,15 +23,18 @@ public class GameController : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-    // Start is called before the first frame update
     void Start()
     {
-
+        btnMenu.onClick.AddListener(() => { SceneManager.LoadScene("Main Menu"); });
+        btnReset.onClick.AddListener(() => { SceneManager.LoadScene(SceneManager.GetActiveScene().name); });
+        ResultPanel.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetResult(bool win)
     {
-
+        ResultPanel.SetActive(true);
+        txtResult.text = win ? "GANASTE" : "PERDISTE";
     }
+
+
 }

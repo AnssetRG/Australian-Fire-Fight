@@ -11,6 +11,7 @@ public class FireController : MonoBehaviour
     public Color OverColor;
     public int spawnTime; //lo pude directamente en el levelcontroller pq no sabia si cuando estaba en false en active igual corria el update (no lo use)
     public float despawnTime; //tiempo para que desaparezcan y salga el gameover
+    public GameObject signalPrefab;
     public GameObject singalCanvas;
     public Transform player;
     private void OnMouseDown()
@@ -20,6 +21,7 @@ public class FireController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = PressedColor;
         if (Life < 0)
         {
+            Destroy(singalCanvas);
             Destroy(this.gameObject);
         }
     }
@@ -45,7 +47,7 @@ public class FireController : MonoBehaviour
 
     private void Awake()
     {
-        despawnTime = 5f;
+        despawnTime = 25f;
     }
 
     /// <summary>
@@ -54,8 +56,12 @@ public class FireController : MonoBehaviour
     /// </summary>
     void Start()
     {
-        Debug.Log(singalCanvas.transform.localPosition);
-
+        if (singalCanvas == null)
+        {
+            singalCanvas = Instantiate(signalPrefab, Vector3.zero, Quaternion.identity);
+            singalCanvas.transform.SetParent(GameObject.Find("Canvas").transform);
+            singalCanvas.transform.localScale = Vector3.one;
+        }
     }
 
     private void Update()
@@ -64,7 +70,7 @@ public class FireController : MonoBehaviour
 
         if (despawnTime <= 0)
         {
-            print("perdiste sorry"); //aca haces lo del singleton de game over
+            GameController.instance.SetResult(false);
         }
         else
         {
@@ -81,6 +87,12 @@ public class FireController : MonoBehaviour
         {
             singalCanvas.SetActive(false);
             return;
+        }
+        else
+        {
+            float relation_distance = Vector3.Distance(transform.position, player.position);
+            float scale_result = relation_distance / 30 > 1 ? 0.25f : (30 - relation_distance) / 30;
+            singalCanvas.transform.localScale = new Vector3(scale_result, scale_result, 1f);
         }
         singalCanvas.SetActive(true);
         float relationX = result.x / 9f;

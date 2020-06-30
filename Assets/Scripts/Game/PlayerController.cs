@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 float step = 5f * Time.deltaTime; // calculate distance to move
+                transform.localScale = new Vector3(transform.position.x < target.x ? -0.5f : 0.5f, 0.5f, 0.5f);
                 transform.position = Vector3.MoveTowards(transform.position, target, step);
                 animator.Play("Walking");
             }
@@ -74,6 +75,7 @@ public class PlayerController : MonoBehaviour
 
     public void ShootWater(Vector2 pos)
     {
+        canMove = false;
         //calcular angle de jugador a fire
 
         float ang = Mathf.Atan2(pos.y - transform.position.y, pos.x - transform.position.x) * 180 / Mathf.PI;
