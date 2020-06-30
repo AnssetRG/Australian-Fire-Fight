@@ -11,10 +11,19 @@ public class MouseController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("Apretado");
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray))
-                Debug.Log(transform.position);
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, 100f, 1 << 8);
+            if (hit.collider != null)
+            {
+                Transform t = hit.collider.transform;
+                if (t.gameObject.tag == "Australia")
+                {
+                    Vector3 point = ray.origin + (ray.direction * 4.5f);
+                    point.z = 0f;
+                    PlayerController.instance.SetTarget(point);
+                    PlayerController.instance.ShootWater(point);
+                }
+            }
         }
     }
 }

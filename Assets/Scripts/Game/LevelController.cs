@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class LevelController : MonoBehaviour
+public class FireGeneralController : MonoBehaviour
 {
     private List<GameObject> FireList;
     public GameObject fireGameObj;
@@ -25,12 +25,13 @@ public class LevelController : MonoBehaviour
 
         spawnTimers = new List<float>();
 
-        foreach (Fire data in FireData) {
+        foreach (Fire data in FireData)
+        {
             Vector3 position = new Vector3(data.x, data.y);
             GameObject newFire = Instantiate(fireGameObj, position, Quaternion.identity);
             newFire.GetComponent<FireController>().Life = data.life;
             newFire.GetComponent<FireController>().despawnTime = data.despawnTime;
-            newFire.transform.localScale = new Vector3(data.scale,data.scale,1);
+            newFire.transform.localScale = new Vector3(data.scale, data.scale, 1);
             spawnTimers.Add(data.spawnTime);
             newFire.SetActive(false);
             FireList.Add(newFire);
@@ -40,20 +41,24 @@ public class LevelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeElapsed = 0f;  
+        timeElapsed = 0f;
         mayorSpawnTime = spawnTimers.Max();
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
         timeElapsed += Time.deltaTime;
-        for (int i = 0; i < spawnTimers.Count; i++) {
-            if (timeElapsed >= spawnTimers[i]) {
+        for (int i = 0; i < spawnTimers.Count; i++)
+        {
+            if (timeElapsed >= spawnTimers[i])
+            {
                 spawnTimers[i] = 999; //caquita
                 FireList[i].SetActive(true);
             }
         }
-        if (timeElapsed > mayorSpawnTime) {
+        if (timeElapsed > mayorSpawnTime)
+        {
             spawnTimers.Clear();
         }
     }
