@@ -41,15 +41,36 @@ public class MenuGeneralController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Botones para cambiar la intensidad de sonido
         btnMusic.onClick.AddListener(() => ChangeMusic());
         btnMusic.GetComponentInChildren<Text>().text = AudioController.instance.MusicMute ? "Off" : "On";
         btnSound.onClick.AddListener(() => ChangeSound());
         btnSound.GetComponentInChildren<Text>().text = AudioController.instance.SoundMute ? "Off" : "On";
 
+        //Botones principales del Menu
         btnPlay.onClick.AddListener(() => Play());
         btnExit.onClick.AddListener(() => Exit());
         btnInfinite.onClick.AddListener(() => LoadInfinite());
         btnBack.onClick.AddListener(() => Back());
+
+        /*Debug.Log("WIN QUOTES");
+        string WinQuotes = JsonFileReader.LoadJsonAsResource("win.json");
+        QuoteData quoteData = JsonUtility.FromJson<QuoteData>(WinQuotes);
+
+        foreach (Quote item in quoteData.Quotes)
+        {
+            print(item.sentence);
+        }
+
+
+        Debug.Log("LOOSE QUOTES");
+        string LooseQuotes = JsonFileReader.LoadJsonAsResource("loose.json");
+        QuoteData quoteData1 = JsonUtility.FromJson<QuoteData>(LooseQuotes);
+
+        foreach (Quote item in quoteData1.Quotes)
+        {
+            print(item.sentence);
+        }*/
 
 
         InitPanel.SetActive(true);
