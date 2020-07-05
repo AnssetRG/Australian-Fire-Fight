@@ -5,25 +5,94 @@
       {
         "life": 10,
         "scale": 1,
-        "x": 0,
+        "x": 19.5,
         "y": 0,
         "spawnTime": 5,
+        "despawnTime": 30
+      },
+      {
+        "life": 15,
+        "scale": 1.5,
+        "x": 0,
+        "y": 0,
+        "spawnTime": 15,
+        "despawnTime": 20
+      },
+      {
+        "life": 5,
+        "scale": 0.5,
+        "x": -24.5,
+        "y": -10,
+        "spawnTime": 30,
+        "despawnTime": 20
+      },
+      {
+        "life": 15,
+        "scale": 1.5,
+        "x": -24.5,
+        "y": 11.3,
+        "spawnTime": 50,
+        "despawnTime": 20
+      },
+      {
+        "life": 15,
+        "scale": 1.5,
+        "x": 24.5,
+        "y": -10,
+        "spawnTime": 70,
+        "despawnTime": 30
+      }
+    ]
+  },
+  {
+    "level": 2,
+    "fires": [
+      {
+        "life": 15,
+        "scale": 1.5,
+        "x": 30.3,
+        "y": -2,
+        "spawnTime": 5,
+        "despawnTime": 20
+      },
+      {
+        "life": 10,
+        "scale": 1,
+        "x": -2.1,
+        "y": 17.2,
+        "spawnTime": 10,
+        "despawnTime": 15
+      },
+      {
+        "life": 10,
+        "scale": 1,
+        "x": 24,
+        "y": 11.1,
+        "spawnTime": 25,
         "despawnTime": 15
       },
       {
         "life": 15,
         "scale": 1.5,
-        "x": 12.5,
-        "y": 3,
-        "spawnTime": 10,
-        "despawnTime": 15
+        "x": 0,
+        "y": 0,
+        "spawnTime": 30,
+        "despawnTime": 20
       },
       {
-        "life": 5,
-        "scale": 0.5,
-        "x": -12.5,
-        "y": 0,
-        "spawnTime": 15,
+        "life": 10,
+        "scale": 1,
+        "x": -21.7,
+        "y": 13.8,
+        "spawnTime": 30,
+        "despawnTime": 20
+      },
+      {
+        "life": 10,
+        "scale": 1.5,
+        "x": 26.2,
+        "y": -12.6,
+        "spawnTime": 45,
         "despawnTime": 15
       }
     ]
@@ -32,11 +101,75 @@
     "level": 2,
     "fires": [
       {
-        "life": 20,
-        "scale": 2,
-        "x": 0,
-        "y": -3,
+        "life": 15,
+        "scale": 1.5,
+        "x": 33,
+        "y": 5,
         "spawnTime": 5,
+        "despawnTime": 25
+      },
+      {
+        "life": 10,
+        "scale": 1.0,
+        "x": -22.1,
+        "y": 13.3,
+        "spawnTime": 5,
+        "despawnTime": 25
+      },
+      {
+        "life": 10,
+        "scale": 1.0,
+        "x": 33.7,
+        "y": -3.1,
+        "spawnTime": 10,
+        "despawnTime": 15
+      },
+      {
+        "life": 15,
+        "scale": 1.5,
+        "x": 28.6,
+        "y": -13.3,
+        "spawnTime": 30,
+        "despawnTime": 15
+      },
+      {
+        "life": 5,
+        "scale": 0.5,
+        "x": 28.6,
+        "y": 7.3,
+        "spawnTime": 40,
+        "despawnTime": 15
+      },
+      {
+        "life": 15,
+        "scale": 1.5,
+        "x": -22.5,
+        "y": -8.5,
+        "spawnTime": 40,
+        "despawnTime": 20
+      },
+      {
+        "life": 15,
+        "scale": 1.5,
+        "x": -3.7,
+        "y": 17.6,
+        "spawnTime": 60,
+        "despawnTime": 20
+      },
+      {
+        "life": 10,
+        "scale": 1.0,
+        "x": 13.8,
+        "y": 13.2,
+        "spawnTime": 60,
+        "despawnTime": 15
+      },
+      {
+        "life": 5,
+        "scale": 0.5,
+        "x": 13.8,
+        "y": -6.3,
+        "spawnTime": 60,
         "despawnTime": 15
       }
     ]

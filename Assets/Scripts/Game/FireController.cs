@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class FireController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class FireController : MonoBehaviour
     public GameObject signalPrefab;
     public GameObject singalCanvas;
     public Transform player;
+    public Light2D light;
+
     private void OnMouseDown()
     {
         PlayerController.instance.ShootWater(transform.position);
@@ -21,7 +24,8 @@ public class FireController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = PressedColor;
         if (Life < 0)
         {
-            Destroy(singalCanvas);
+            FireGeneralController.instance.firesPutOut++;
+            Destroy(singalCanvas);            
             Destroy(this.gameObject);
         }
     }
@@ -39,7 +43,6 @@ public class FireController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = OverColor;
     }
 
-
     private void OnMouseExit()
     {
         GetComponent<SpriteRenderer>().color = NormalColor;
@@ -56,6 +59,10 @@ public class FireController : MonoBehaviour
     /// </summary>
     void Start()
     {
+        light = this.GetComponentInChildren<Light2D>();
+        print(light);
+        player = PlayerController.instance.transform;
+
         if (singalCanvas == null)
         {
             singalCanvas = Instantiate(signalPrefab, Vector3.zero, Quaternion.identity);
@@ -66,6 +73,10 @@ public class FireController : MonoBehaviour
 
     private void Update()
     {
+
+        light.intensity = Mathf.Lerp(0.9f, 1.0f, Mathf.PingPong(Time.time * 5.0f, 1));
+        light.pointLightOuterRadius = Mathf.Lerp(5.0f, 6.4f, Mathf.PingPong(Time.time * 2.0f, 1));
+
         despawnTime -= Time.deltaTime;
 
         if (despawnTime <= 0)

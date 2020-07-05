@@ -5,22 +5,27 @@ using System.Linq;
 
 public class FireGeneralController : MonoBehaviour
 {
+    public static FireGeneralController instance;
     private List<GameObject> FireList;
     public GameObject fireGameObj;
     private LevelData LevelDataObj;
     private int level;
     private List<float> spawnTimers;
     private float timeElapsed;
-    float mayorSpawnTime;
+    private float mayorSpawnTime;
+    public int firesPutOut;
+    private int firesToPutOut;
 
     private void Awake()
     {
+        CreateSingleton();
+
         FireList = new List<GameObject>();
 
         string levelData = JsonFileReader.LoadJsonAsResource("levels.json");
         LevelDataObj = JsonUtility.FromJson<LevelData>(levelData);
 
-        level = 1; //se jala del menu okis playerprefs dud
+        level = 2; //se jala del menu okis playerprefs dud
         List<Fire> FireData = LevelDataObj.levels[level - 1].fires;
 
         spawnTimers = new List<float>();
@@ -38,10 +43,19 @@ public class FireGeneralController : MonoBehaviour
         }
     }
 
+    void CreateSingleton() {
+        if (instance == null) {
+            instance = this;
+        } else if (instance != this) {
+            Destroy(this);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         timeElapsed = 0f;
+        firesPutOut = 0;
+        firesToPutOut = FireList.Count;
         mayorSpawnTime = spawnTimers.Max();
     }
 
@@ -57,9 +71,15 @@ public class FireGeneralController : MonoBehaviour
                 FireList[i].SetActive(true);
             }
         }
+
+        if (firesPutOut == firesToPutOut) {
+            GameController.instance.SetResult(true);
+        }
+       
         if (timeElapsed > mayorSpawnTime)
         {
             spawnTimers.Clear();
         }
+        
     }
 }
