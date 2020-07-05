@@ -21,7 +21,8 @@ public class FireController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = PressedColor;
         if (Life < 0)
         {
-            Destroy(singalCanvas);
+            FireGeneralController.instance.firesPutOut++;
+            Destroy(singalCanvas);            
             Destroy(this.gameObject);
         }
     }
@@ -39,7 +40,6 @@ public class FireController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = OverColor;
     }
 
-
     private void OnMouseExit()
     {
         GetComponent<SpriteRenderer>().color = NormalColor;
@@ -56,6 +56,7 @@ public class FireController : MonoBehaviour
     /// </summary>
     void Start()
     {
+        player = PlayerController.instance.transform;
         if (singalCanvas == null)
         {
             singalCanvas = Instantiate(signalPrefab, Vector3.zero, Quaternion.identity);

@@ -121,8 +121,13 @@ MonoBehaviour:
   Life: 10
   NormalColor: {r: 1, g: 0.56078434, b: 0, a: 1}
   PressedColor: {r: 1, g: 0.28235295, b: 0, a: 1}
+  OverColor: {r: 0, g: 0, b: 0, a: 0}
   spawnTime: 0
   despawnTime: 0
+  signalPrefab: {fileID: 251550995642920354, guid: acc58ee74494b8d459ad6e21a74b33f9,
+    type: 3}
+  singalCanvas: {fileID: 0}
+  player: {fileID: 0}
 --- !u!95 &2271860566690313203
 Animator:
   serializedVersion: 3
