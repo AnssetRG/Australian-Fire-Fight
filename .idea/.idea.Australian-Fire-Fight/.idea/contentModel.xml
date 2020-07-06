@@ -10,8 +10,8 @@
           <e p="Game" t="Include">
             <e p="CameraController.cs" t="Include" />
             <e p="FireController.cs" t="Include" />
+            <e p="FireGeneralController.cs" t="Include" />
             <e p="GameController.cs" t="Include" />
-            <e p="LevelController.cs" t="Include" />
             <e p="MouseController.cs" t="Include" />
             <e p="PlayerController.cs" t="Include" />
             <e p="QuoteData.cs" t="Include" />
@@ -24,6 +24,7 @@
             <e p="ButtonLevel.cs" t="Include" />
             <e p="MenuGeneralController.cs" t="Include" />
           </e>
+          <e p="SceneController.cs" t="Include" />
         </e>
       </e>
       <e p="Australian-Fire-Fight.sln" t="IncludeFlat" />

@@ -119,6 +119,7 @@ public class FireGeneralController : MonoBehaviour
         float scale_t = Random.Range(1, 5);
         newFire.transform.localScale = new Vector3(scale_t, scale_t, 1);
         actual_wait_time = Random.Range(5, 10);
+        timeElapsed = 0;
     }
 
     Vector3 RandomPosition()
