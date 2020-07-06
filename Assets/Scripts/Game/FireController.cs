@@ -17,11 +17,16 @@ public class FireController : MonoBehaviour
     public Transform player;
     public Light2D light;
 
-    private void OnMouseDown()
+    protected virtual void OnMouseDown()
     {
         //PlayerController.instance.ShootWater(transform.position);
         Life--;
         GetComponent<SpriteRenderer>().color = PressedColor;
+        checkLife();
+    }
+
+    public void checkLife()
+    {
         if (Life < 0)
         {
             FireGeneralController.instance.FireEliminated();
@@ -30,17 +35,17 @@ public class FireController : MonoBehaviour
         }
     }
 
-    private void OnMouseUp()
+    protected virtual void OnMouseUp()
     {
         GetComponent<SpriteRenderer>().color = NormalColor;
     }
 
-    void OnMouseEnter()
+    protected virtual void OnMouseEnter()
     {
         GetComponent<SpriteRenderer>().color = OverColor;
     }
 
-    private void OnMouseExit()
+    protected virtual void OnMouseExit()
     {
         GetComponent<SpriteRenderer>().color = NormalColor;
     }
@@ -50,7 +55,7 @@ public class FireController : MonoBehaviour
         despawnTime = 25f;
     }
 
-    void Start()
+    protected void Start()
     {
         light = this.GetComponentInChildren<Light2D>();
         print(light);
@@ -59,12 +64,12 @@ public class FireController : MonoBehaviour
         if (singalCanvas == null)
         {
             singalCanvas = Instantiate(signalPrefab, Vector3.zero, Quaternion.identity);
-            singalCanvas.transform.SetParent(GameObject.Find("Canvas").transform);
+            singalCanvas.transform.SetParent(GameObject.Find("Game Canvas").transform);
             singalCanvas.transform.localScale = Vector3.one;
         }
     }
 
-    private void Update()
+    protected void Update()
     {
         if (GameController.instance.gameEnded) return;
 
@@ -108,7 +113,7 @@ public class FireController : MonoBehaviour
         singalCanvas.transform.localPosition = new Vector3(X, Y, 0f);
     }
 
-    float returnResult(float relation, float min, float max)
+    protected virtual float returnResult(float relation, float min, float max)
     {
         if (Mathf.Abs(relation) > 1f)
         {
