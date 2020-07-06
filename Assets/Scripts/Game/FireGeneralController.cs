@@ -15,18 +15,23 @@ public class FireGeneralController : MonoBehaviour
     private float mayorSpawnTime;
     public int firesPutOut;
     private int firesToPutOut;
+    private float actual_wait_time;
 
     private void Awake()
     {
         CreateSingleton();
+
+        if (PlayerPrefs.GetInt("level") == 4)
+        {
+            return;
+        }
 
         FireList = new List<GameObject>();
 
         string levelData = JsonFileReader.LoadJsonAsResource("levels.json");
         LevelDataObj = JsonUtility.FromJson<LevelData>(levelData);
 
-        level = 2; //se jala del menu okis playerprefs dud
-        List<Fire> FireData = LevelDataObj.levels[level - 1].fires;
+        List<Fire> FireData = LevelDataObj.levels[PlayerPrefs.GetInt("level") - 1].fires;
 
         spawnTimers = new List<float>();
 
@@ -43,10 +48,14 @@ public class FireGeneralController : MonoBehaviour
         }
     }
 
-    void CreateSingleton() {
-        if (instance == null) {
+    void CreateSingleton()
+    {
+        if (instance == null)
+        {
             instance = this;
-        } else if (instance != this) {
+        }
+        else if (instance != this)
+        {
             Destroy(this);
         }
     }
@@ -55,6 +64,11 @@ public class FireGeneralController : MonoBehaviour
     {
         timeElapsed = 0f;
         firesPutOut = 0;
+        if (PlayerPrefs.GetInt("level") == 4)
+        {
+            InstantiateRandomFire();
+            return;
+        }
         firesToPutOut = FireList.Count;
         mayorSpawnTime = spawnTimers.Max();
     }
@@ -63,6 +77,20 @@ public class FireGeneralController : MonoBehaviour
     void Update()
     {
         timeElapsed += Time.deltaTime;
+        if (PlayerPrefs.GetInt("level") == 4)
+        {
+            if (timeElapsed >= actual_wait_time)
+                InstantiateRandomFire();
+        }
+        else
+        {
+            SetFire();
+        }
+
+    }
+
+    void SetFire()
+    {
         for (int i = 0; i < spawnTimers.Count; i++)
         {
             if (timeElapsed >= spawnTimers[i])
@@ -72,14 +100,37 @@ public class FireGeneralController : MonoBehaviour
             }
         }
 
-        if (firesPutOut == firesToPutOut) {
+        if (firesPutOut == firesToPutOut)
+        {
             GameController.instance.SetResult(true);
         }
-       
+
         if (timeElapsed > mayorSpawnTime)
         {
             spawnTimers.Clear();
         }
-        
+    }
+
+    void InstantiateRandomFire()
+    {
+        GameObject newFire = Instantiate(fireGameObj, RandomPosition(), Quaternion.identity);
+        newFire.GetComponent<FireController>().Life = Random.Range(2, 10);
+        newFire.GetComponent<FireController>().despawnTime = Random.Range(25, 50);
+        float scale_t = Random.Range(1, 5);
+        newFire.transform.localScale = new Vector3(scale_t, scale_t, 1);
+        actual_wait_time = Random.Range(5, 10);
+    }
+
+    Vector3 RandomPosition()
+    {
+        float x = Random.Range(-35, 35);
+        float y = Random.Range(-10, 20);
+        return new Vector3(x, y, 0);
+    }
+
+    public void FireEliminated()
+    {
+        firesPutOut++;
+        GameController.instance.FireOutMessage(true);
     }
 }

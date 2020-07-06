@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 target;
     public static PlayerController instance;
     private Animator animator;
+    private AudioSource water;
 
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         CameraController.instance.SetPlayer(this.transform);
+        water = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -55,14 +57,6 @@ public class PlayerController : MonoBehaviour
     {
         target = newTarget;
         canMove = true;
-        /*if (x > transform.position.x)
-        {
-            ChangeVelocity(new Vector2(2.5f, 0f), -0.5f);
-        }
-        else
-        {
-            ChangeVelocity(new Vector2(-2.5f, 0f), 0.5f);
-        }*/
     }
 
 
@@ -83,5 +77,6 @@ public class PlayerController : MonoBehaviour
         //setear angulo
         ParticleRotator.transform.eulerAngles = new Vector3(0f, 0f, ang);
         ParticleRotator.GetComponentInChildren<ParticleSystem>().Play();
+        water.Play();
     }
 }

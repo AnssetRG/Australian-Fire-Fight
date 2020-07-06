@@ -19,13 +19,13 @@ public class FireController : MonoBehaviour
 
     private void OnMouseDown()
     {
-        PlayerController.instance.ShootWater(transform.position);
+        //PlayerController.instance.ShootWater(transform.position);
         Life--;
         GetComponent<SpriteRenderer>().color = PressedColor;
         if (Life < 0)
         {
-            FireGeneralController.instance.firesPutOut++;
-            Destroy(singalCanvas);            
+            FireGeneralController.instance.FireEliminated();
+            Destroy(singalCanvas);
             Destroy(this.gameObject);
         }
     }
@@ -35,9 +35,6 @@ public class FireController : MonoBehaviour
         GetComponent<SpriteRenderer>().color = NormalColor;
     }
 
-    /// <summary>
-    /// Called when the mouse enters the GUIElement or Collider.
-    /// </summary>
     void OnMouseEnter()
     {
         GetComponent<SpriteRenderer>().color = OverColor;
@@ -53,10 +50,6 @@ public class FireController : MonoBehaviour
         despawnTime = 25f;
     }
 
-    /// <summary>
-    /// Start is called on the frame when a script is enabled just before
-    /// any of the Update methods is called the first time.
-    /// </summary>
     void Start()
     {
         light = this.GetComponentInChildren<Light2D>();
@@ -73,6 +66,7 @@ public class FireController : MonoBehaviour
 
     private void Update()
     {
+        if (GameController.instance.gameEnded) return;
 
         light.intensity = Mathf.Lerp(0.9f, 1.0f, Mathf.PingPong(Time.time * 5.0f, 1));
         light.pointLightOuterRadius = Mathf.Lerp(5.0f, 6.4f, Mathf.PingPong(Time.time * 2.0f, 1));
@@ -82,6 +76,7 @@ public class FireController : MonoBehaviour
         if (despawnTime <= 0)
         {
             GameController.instance.SetResult(false);
+            GameController.instance.FireOutMessage(false);
         }
         else
         {
@@ -102,7 +97,7 @@ public class FireController : MonoBehaviour
         else
         {
             float relation_distance = Vector3.Distance(transform.position, player.position);
-            float scale_result = relation_distance / 30 > 1 ? 0.25f : (30 - relation_distance) / 30;
+            float scale_result = (30 - relation_distance) / 30 < 0.25f ? 0.25f : (30 - relation_distance) / 30;
             singalCanvas.transform.localScale = new Vector3(scale_result, scale_result, 1f);
         }
         singalCanvas.SetActive(true);

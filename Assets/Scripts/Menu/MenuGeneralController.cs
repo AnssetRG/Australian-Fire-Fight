@@ -43,6 +43,7 @@ public class MenuGeneralController : MonoBehaviour
     {
         //Botones para cambiar la intensidad de sonido
         btnMusic.onClick.AddListener(() => ChangeMusic());
+        Debug.Log(btnMusic.GetComponentInChildren<Text>().text);
         btnMusic.GetComponentInChildren<Text>().text = AudioController.instance.MusicMute ? "Off" : "On";
         btnSound.onClick.AddListener(() => ChangeSound());
         btnSound.GetComponentInChildren<Text>().text = AudioController.instance.SoundMute ? "Off" : "On";
@@ -53,25 +54,6 @@ public class MenuGeneralController : MonoBehaviour
         btnInfinite.onClick.AddListener(() => LoadInfinite());
         btnBack.onClick.AddListener(() => Back());
 
-        /*Debug.Log("WIN QUOTES");
-        string WinQuotes = JsonFileReader.LoadJsonAsResource("win.json");
-        QuoteData quoteData = JsonUtility.FromJson<QuoteData>(WinQuotes);
-
-        foreach (Quote item in quoteData.Quotes)
-        {
-            print(item.sentence);
-        }
-
-
-        Debug.Log("LOOSE QUOTES");
-        string LooseQuotes = JsonFileReader.LoadJsonAsResource("loose.json");
-        QuoteData quoteData1 = JsonUtility.FromJson<QuoteData>(LooseQuotes);
-
-        foreach (Quote item in quoteData1.Quotes)
-        {
-            print(item.sentence);
-        }*/
-
 
         InitPanel.SetActive(true);
         PlayPanel.SetActive(false);
@@ -81,34 +63,40 @@ public class MenuGeneralController : MonoBehaviour
     {
         AudioController.instance.SetMuteMusic();
         btnMusic.GetComponentInChildren<Text>().text = AudioController.instance.MusicMute ? "Off" : "On";
+        AudioController.instance.PlayButtonSound();
     }
 
     void ChangeSound()
     {
         AudioController.instance.SetMuteSound();
         btnSound.GetComponentInChildren<Text>().text = AudioController.instance.SoundMute ? "Off" : "On";
+        AudioController.instance.PlayButtonSound();
     }
 
     public void LoadLevel(int level)
     {
-        SceneManager.LoadScene("Level" + level.ToString());
+        PlayerPrefs.SetInt("level", level);
+        SceneController.instance.ChangeScene("Level");
     }
 
     void LoadInfinite()
     {
-        SceneManager.LoadScene("Infinite");
+        PlayerPrefs.SetInt("level", 4);
+        SceneController.instance.ChangeScene("Infinite");
     }
 
     void Play()
     {
         InitPanel.SetActive(false);
         PlayPanel.SetActive(true);
+        AudioController.instance.PlayButtonSound();
     }
 
     void Back()
     {
         InitPanel.SetActive(true);
         PlayPanel.SetActive(false);
+        AudioController.instance.PlayButtonSound();
     }
 
     void Exit()
